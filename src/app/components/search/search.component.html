@@ -8,6 +8,7 @@
 </div>
 
 <app-loading *ngIf="loading && termino.value != ''"></app-loading>
+<app-error *ngIf="error" [error]="error"></app-error>
 
 <app-tarjetas [items]="artists" *ngIf="!loading"></app-tarjetas>
 

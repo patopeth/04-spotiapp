@@ -10,6 +10,7 @@ export class ArtistComponent implements OnInit {
 
   artista: any = {};
   loading: boolean;
+  toptracks: any = {};
 
   constructor(private _spotifyService: SpotifyService,
     private _activatedRouter: ActivatedRoute) {
@@ -22,10 +23,22 @@ export class ArtistComponent implements OnInit {
       id = params['id'];
     });
 
+    this.getArtista(id);
+    this.getTopTracks(id);
+  }
+
+  getArtista(id: string) {
     this.artista = this._spotifyService.getArtistById(id)
-      .subscribe((artista) => {
+      .subscribe(artista => {
         this.artista = artista;
         this.loading = false;
+      });
+  }
+  getTopTracks(id: string) {
+    this._spotifyService.getTopTracks(id)
+      .subscribe(toptracks => {
+        this.toptracks = toptracks;
+        console.log(this.toptracks);
       });
   }
 
